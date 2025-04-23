@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
 import { RegisterDto } from '../dtos/register.dto';
@@ -6,6 +6,8 @@ import { LoginDto } from '../dtos/login.dto';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
@@ -32,6 +34,7 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.userService.findByEmail(loginDto.email);
     if (!user) {
+      this.logger.warn(`Failed login attempt for non-existent user: ${loginDto.email}`);
       throw new UnauthorizedException('Invalid credentials');
     }
 
@@ -40,6 +43,7 @@ export class AuthService {
       loginDto.password,
     );
     if (!isPasswordValid) {
+      this.logger.warn(`Failed login attempt for user: ${loginDto.email}`);
       throw new UnauthorizedException('Invalid credentials');
     }
 

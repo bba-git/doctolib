@@ -6,76 +6,63 @@
 - **AppModule**: Root module
 - **SupabaseModule**: Handles database connection
 - **AuthModule**: Manages authentication
-- **JwtModule**: Handles JWT tokens
-- **ConfigModule**: Manages environment variables
+- **ProfessionalsModule**: Handles professional management
+- **AppointmentsModule**: Manages appointment scheduling
+- **CustomersModule**: Handles customer management
 
-### Routes
-- `/`: Root endpoint
-- `/supabase-test/connection`: Supabase connection test
-- `/auth/register`: User registration
-- `/auth/login`: User login
-- `/test/connection`: Test endpoint
-- `/test/create-test-user`: Test user creation
+### Core Services
+- **SupabaseService**: Database connection and queries
+- **ProfessionalsService**: Professional availability and management
+- **AppointmentsService**: Appointment creation and management
+- **CustomersService**: Customer profile management
 
-## Database Connection
+## Database Schema
 
-### Supabase Configuration
-- URL: `https://mzkwwtmzwhrsqqnwzuzv.supabase.co`
-- Service Role Key: Configured and working
-- Connection Status: ✅ Active
-
-### Connection Flow
-1. SupabaseService constructor called
-2. Environment variables loaded
-3. Client initialization
-4. Connection test performed
-5. Success confirmation logged
-
-## Logging System
-
-### Log Levels
-- INFO: Standard operations
-- ERROR: Error conditions
-- DEBUG: Detailed debugging
-
-### Logged Events
-- Module initialization
-- Route mapping
-- Supabase connection steps
-- Error conditions
-
-## Environment Configuration
-
-### Variables
-- `SUPABASE_URL`: Configured
-- `SUPABASE_SERVICE_ROLE_KEY`: Configured
-- `JWT_SECRET`: Configured
+### Tables
+- **professionals**: Professional staff information
+- **appointments**: Appointment scheduling
+- **customers**: Customer profiles
 
 ## API Endpoints
 
-### Authentication
-- POST `/auth/register`: Register new user
-- POST `/auth/login`: User login
+### Professionals
+- GET `/professionals`: List all professionals
+- GET `/professionals/:id`: Get professional details
+- POST `/professionals`: Create new professional
+- PUT `/professionals/:id`: Update professional
 
-### Testing
-- GET `/supabase-test/connection`: Test database connection
-- GET `/test/connection`: General test endpoint
-- POST `/test/create-test-user`: Create test user
+### Appointments
+- GET `/appointments`: List all appointments
+- GET `/appointments/:id`: Get appointment details
+- POST `/appointments`: Create new appointment
+- PUT `/appointments/:id`: Update appointment status
+
+### Customers
+- GET `/customers`: List all customers
+- GET `/customers/:id`: Get customer details
+- POST `/customers`: Create new customer
+- PUT `/customers/:id`: Update customer
 
 ## Current Implementation Status
 
 ### Working Features
-- Database connection
-- Environment variable loading
-- Route mapping
-- Basic authentication structure
-- Logging system
+- Database connection with Supabase
+- Professional management (CRUD operations)
+- Appointment scheduling with availability checking
+- Customer profile management
+- Basic error handling and validation
 
-### Pending Implementation
-- User registration logic
-- Login authentication
-- JWT token generation
-- Database schema
-- Input validation
+### Testing
+- Database connection tests
+- Professional service tests
+- Appointment service tests
+- Customer service tests
 
-Last Updated: 04/23/2025, 8:27:39 PM
+## Environment Configuration
+
+### Required Variables
+- `SUPABASE_URL`: Database URL
+- `SUPABASE_SERVICE_ROLE_KEY`: Database access key
+- `SUPABASE_KEY`: Client access key
+
+Last Updated: 04/23/2024

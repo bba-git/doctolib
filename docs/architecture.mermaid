@@ -1,0 +1,51 @@
+graph TD
+    %% Core Modules
+    AppModule[App Module] --> SupabaseModule[Supabase Module]
+    AppModule --> AuthModule[Auth Module]
+    AppModule --> ProfessionalsModule[Professionals Module]
+    AppModule --> AppointmentsModule[Appointments Module]
+    AppModule --> CustomersModule[Customers Module]
+
+    %% Services
+    SupabaseModule --> SupabaseService[Supabase Service]
+    ProfessionalsModule --> ProfessionalsService[Professionals Service]
+    AppointmentsModule --> AppointmentsService[Appointments Service]
+    CustomersModule --> CustomersService[Customers Service]
+
+    %% Database
+    SupabaseService --> Database[(Supabase Database)]
+    Database --> ProfessionalsTable[professionals table]
+    Database --> AppointmentsTable[appointments table]
+    Database --> CustomersTable[customers table]
+
+    %% Service Dependencies
+    AppointmentsService --> ProfessionalsService
+    AppointmentsService --> CustomersService
+
+    %% API Layer
+    ProfessionalsModule --> ProfessionalsController[Professionals Controller]
+    AppointmentsModule --> AppointmentsController[Appointments Controller]
+    CustomersModule --> CustomersController[Customers Controller]
+
+    %% External Services (Future)
+    ProfessionalsService -.->|Future| CalendarService[Calendar Service]
+    AppointmentsService -.->|Future| EmailService[Email Service]
+    AppointmentsService -.->|Future| SignatureService[Signature Service]
+
+    %% Compliance Layer (Future)
+    SignatureService -.->|Future| RGSCompliance[RGS Compliance]
+    SignatureService -.->|Future| SecNumCloud[SecNumCloud]
+    SignatureService -.->|Future| RGPD[RGPD]
+
+    %% Styling
+    classDef module fill:#f9f,stroke:#333,stroke-width:2px
+    classDef service fill:#bbf,stroke:#333,stroke-width:2px
+    classDef controller fill:#bfb,stroke:#333,stroke-width:2px
+    classDef database fill:#fbb,stroke:#333,stroke-width:2px
+    classDef future fill:#ddd,stroke:#333,stroke-width:2px,dashed
+
+    class AppModule,AuthModule,ProfessionalsModule,AppointmentsModule,CustomersModule module
+    class SupabaseService,ProfessionalsService,AppointmentsService,CustomersService service
+    class ProfessionalsController,AppointmentsController,CustomersController controller
+    class Database,ProfessionalsTable,AppointmentsTable,CustomersTable database
+    class CalendarService,EmailService,SignatureService,RGSCompliance,SecNumCloud,RGPD future
