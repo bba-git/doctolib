@@ -41,17 +41,19 @@ Dependencies: USER-001 (Authentication)
 - [x] Users can book appointments (visio or in-person)
 - [x] Appointments are associated with notarial staff
 - [x] Ability to cancel or reschedule
+- [x] Basic availability checking implemented
 
 ### Acceptance Criteria
 1. [x] Authenticated users can access a scheduling interface
 2. [x] Appointments are stored in the database and linked to user and notary
-3. [x] Timeslots reflect staff availability (hardcoded or config-based for MVP)
+3. [x] Timeslots reflect staff availability (basic overlap checking implemented)
 4. [ ] User and staff receive confirmation via email (mock or real)
 
 ### Technical Notes
 - [x] Use `Appointment` entity from `technical.md`
-- [x] Add basic availability config for now (cron/slots can be hardcoded)
+- [x] Basic availability checking implemented in ProfessionalsService
 - [ ] Later sprints will handle ICS calendar sync and real-time availability
+- [ ] Consider adding business hours and other constraints to availability check
 
 ---
 

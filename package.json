@@ -1,29 +1,35 @@
 {
-  "name": "frontend",
+  "name": "doctolib-backend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:connection": "ts-node -P tsconfig.test.json src/common/test/connection-test.ts"
   },
   "dependencies": {
-    "next": "15.3.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
+    "@nestjs/core": "^9.0.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@nestjs/testing": "^11.1.0",
-    "@tailwindcss/postcss": "^4",
+    "@nestjs/testing": "^9.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.1",
-    "tailwindcss": "^4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

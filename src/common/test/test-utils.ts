@@ -1,20 +1,29 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SupabaseService } from '../../common/services/supabase.service';
+import { SupabaseService } from '../services/supabase.service';
 import { ConfigService } from '@nestjs/config';
 
-export const createMockSupabaseService = () => ({
-  from: jest.fn().mockReturnThis(),
-  select: jest.fn().mockReturnThis(),
-  insert: jest.fn().mockReturnThis(),
-  update: jest.fn().mockReturnThis(),
-  delete: jest.fn().mockReturnThis(),
-  eq: jest.fn().mockReturnThis(),
-  neq: jest.fn().mockReturnThis(),
-  gte: jest.fn().mockReturnThis(),
-  lte: jest.fn().mockReturnThis(),
-  or: jest.fn().mockReturnThis(),
-  single: jest.fn().mockResolvedValue({ data: null, error: null }),
-});
+export const createMockSupabaseService = () => {
+  const mockClient = {
+    from: jest.fn().mockReturnThis(),
+    select: jest.fn().mockReturnThis(),
+    insert: jest.fn().mockReturnThis(),
+    update: jest.fn().mockReturnThis(),
+    delete: jest.fn().mockReturnThis(),
+    eq: jest.fn().mockReturnThis(),
+    neq: jest.fn().mockReturnThis(),
+    gte: jest.fn().mockReturnThis(),
+    lte: jest.fn().mockReturnThis(),
+    or: jest.fn().mockReturnThis(),
+    single: jest.fn().mockResolvedValue({ data: null, error: null }),
+  };
+
+  return {
+    onModuleInit: jest.fn().mockResolvedValue(undefined),
+    getClient: jest.fn().mockReturnValue(mockClient),
+    testConnection: jest.fn().mockResolvedValue(undefined),
+    client: mockClient,
+  };
+};
 
 export const createMockConfigService = () => ({
   get: jest.fn().mockImplementation((key: string) => {
